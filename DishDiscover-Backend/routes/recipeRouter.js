@@ -25,7 +25,7 @@ router.post(
 /**
  * @route POST /editrecipe
  * @desc update recipe
- * @access private
+ * @access private 
  */
 router.post("/editrecipe/:id", isLoggedIn, editRecipeRoute);
 deleteRecipeRoute;
