@@ -1,55 +1,8 @@
-// import {React, useState, useEffect, useRef} from "react";
-// import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
-
-// const Navbar = () => {
-
-//   const [searchTerm, setSearchTerm] = useState("");
-//   const [showResults, setShowResults] = useState(false);
-//   const searchRef = useRef(null);
-//   const { recipes } = useSelector((state) => state.recipes);
-
-//   // Filter recipes based on search term
-//   const filteredRecipes = recipes?.filter((recipe) =>
-//     recipe.dish.toLowerCase().includes(searchTerm.toLowerCase())
-//   ).sort((a, b) => a.dish.localeCompare(b.dish)); // Sort alphabetically
-
-//   // Handle click outside search results
-//   useEffect(() => {
-//     const handleClickOutside = (e) => {
-//       if (searchRef.current && !searchRef.current.contains(e.target)) {
-//         setShowResults(false);
-//       }
-//     };
-//     document.addEventListener("mousedown", handleClickOutside);
-//     return () => document.removeEventListener("mousedown", handleClickOutside);
-//   }, []);
-
-//   return (
-//     <div className="w-screen h-14 flex justify-between items-center px-6">
-//       <div className="flex items-center space-x-4">
-//         <img src="/src/assets/Logo.png" alt="Logo" className="h-18 w-18" />
-//         {/* <h2 className="text-xl font-medium">DishDiscover</h2> */}
-//         <Link to="/home" className="text-base font-medium text-[#4CAF50] hover:text-yellow-500">Home</Link>
-//         <Link to='/my-recipe' className="text-base font-medium text-[#4CAF50] hover:text-yellow-500">MyRecipies</Link>
-//         <Link className="text-base font-medium text-[#4CAF50] hover:text-yellow-500">MyFavourites</Link>
-//         <Link to="/add-recipe" className="text-base font-medium text-[#4CAF50] hover:text-yellow-500">AddRecipe</Link>
-//       </div>
-//       <div className="flex items-center">
-//         <input type="text" placeholder="Search for a dish..." />
-//         <button className="bg-[#4CAF50] hover:bg-yellow-500 hover:cursor-pointer text-white font-medium py-2 px-4 rounded-full">Search</button>
-
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Navbar;
-
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/userAuth/authSlice";
+import logo from "../assets/Logo.png";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,7 +33,7 @@ const Navbar = () => {
   return (
     <div className="w-screen h-14 flex justify-between items-center px-6">
       <div className="flex items-center space-x-4">
-        <img src="/src/assets/Logo.png" alt="Logo" className="h-18 w-18" />
+        <img src={logo} alt="Logo" className="h-18 w-18" />
         <Link
           to="/home"
           className="text-base font-medium text-[#4CAF50] hover:text-yellow-500"

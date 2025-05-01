@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../features/userAuth/authSlice";
-import { useSelector } from "react-redux";
+import signup from "../assets/Signup.png";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const Signup = () => {
 
   return (
     <div className="w-[100%] h-[100%] bg-[#FCF5E5] flex justify-between items-center px-6">
-      <img className="w-[50%] h-screen" src="/src/assets/Signup.png" alt="" />
+      <img className="w-[50%] h-screen" src={signup} alt="" />
       <div className="h-screen w-[50%] bg-[#FCF5E5] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
