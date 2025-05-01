@@ -13,6 +13,6 @@ exports.isLoggedIn = (req, res, next) => {
         let message;
         if(!req.user) message = 'Session timeout! User not found'
         else message = error;
-        res.status(500).json({error: message});
+        res.status(440).json({error: message});
     }
 }

@@ -7,7 +7,8 @@ const {
   editRecipeRoute,
   deleteRecipeRoute,
   getRecipesRoute,
-  getRecipebyidRoute
+  getRecipebyidRoute,
+  getUserRecipes
 } = require("../controller/recipeControllers");
 
 /**
@@ -50,5 +51,13 @@ router.get("/getRecipesRoute", isLoggedIn, getRecipesRoute);
  * @access private
  */
 router.get("/getRecipeRoute/:id", isLoggedIn, getRecipebyidRoute);
+
+/**
+ * @route GET /getUserRecipeRoute
+ * @desc Find user recipe by Id
+ * @access private
+ */
+router.get("/getUserRecipe/:id", isLoggedIn, getUserRecipes);
+
 
 module.exports = router;

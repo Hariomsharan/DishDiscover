@@ -79,3 +79,16 @@ exports.getRecipebyidRoute = (req, res, next) => {
       res.status(500).json({ message: "internal server problem", error: err });
     });
 };
+
+
+exports.getUserRecipes = (req, res, next) => {
+  Recipe.find()
+    .populate('chef')
+    .then((recipes) => {
+      const userRecipes = recipes.filter(recipe => recipe.chef._id.toString() === req.params.id);
+      res.status(200).json({ message: "Found Recipes", recipes: userRecipes });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "internal server problem", error: err });
+    });
+};

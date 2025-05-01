@@ -54,11 +54,13 @@ exports.signinRoute = (req, res, next) => {
 
       bcrypt.compare(password, user.password).then((isMatch) => {
         if (!isMatch)
-          return res.status(203).json({ message: "Incorrect Password" });
+          return res.status(401).json({ message: "Incorrect Password" });
 
         const token = jwt.sign({ user }, jwtSecretKey, { expiresIn: 3600 });
         req.header("auth-token", token);
-        res.status(200).json({ message: "successfully Signed in", token });
+        res
+          .status(200)
+          .json({ message: "successfully Signed in", token, user });
       });
     })
     .catch((err) =>
@@ -164,11 +166,9 @@ exports.forgetpasswordRoute = (req, res, next) => {
             if (err) throw err;
             user.password = hash;
             user.save();
-            res
-              .status(201)
-              .json({
-                message: "Password recovered successfully, check your email",
-              });
+            res.status(201).json({
+              message: "Password recovered successfully, check your email",
+            });
           });
         });
       });
