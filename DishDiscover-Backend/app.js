@@ -12,7 +12,9 @@ var recipeRouter = require('./routes/recipeRouter');
 
 var app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://dish-discover-lyart.vercel.app/",
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
