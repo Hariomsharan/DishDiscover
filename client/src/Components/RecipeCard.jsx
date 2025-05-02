@@ -78,7 +78,6 @@ const RecipeCard = (props) => {
             >
               View Recipe
             </button>
-            <i className="ri-star-line text-2xl text-green-600 font-thin mt-4"></i>
           </div>
         </div>
       </div>
