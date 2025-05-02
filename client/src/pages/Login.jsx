@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/userAuth/authSlice";
-import login from "../assets/Login.png";
+import login from "../assets/Signin.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({
