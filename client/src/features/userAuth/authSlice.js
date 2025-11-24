@@ -37,7 +37,6 @@ export const loginUser = createAsyncThunk("auth/login", async (userData) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(res.data);
     return res.data;
   } catch (error) {
     throw error.response.data;
