@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/userAuth/authSlice";
 import signup from "../assets/Signup.png";
 
@@ -11,6 +11,12 @@ const Signup = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
+  
 
   const dispatch = useDispatch();
 
@@ -29,6 +35,12 @@ const Signup = () => {
       password: "",
     });
   };
+
+  useEffect(() => {
+      if(auth.user) {
+        navigate('/home')
+      }
+    }, [auth])
 
   return (
     <div className="w-[100%] h-[100%] bg-[#FCF5E5] flex justify-between items-center px-6">
@@ -141,7 +153,15 @@ const Signup = () => {
                 </button>
               </div>
             </form>
+            {
+                auth.error && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-5" role="alert">
+                    <span className="block sm:inline">{auth.error}</span>
+                  </div>
+                  )
+              }
           </div>
+          
         </div>
       </div>
     </div>

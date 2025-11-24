@@ -14,13 +14,15 @@ const initialState = {
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (userData) => {
+    console.log(userData);
     try {
       const res = await axios.post("users/signup", userData, {
         headers: {
           "Content-Type": "application/json",
+          'Accept': 'application/json'
         },
+        withCredentials: true
       });
-      window.location.href = "/";
       return res.data;
     } catch (error) {
       throw error.response.data;
@@ -35,6 +37,7 @@ export const loginUser = createAsyncThunk("auth/login", async (userData) => {
         "Content-Type": "application/json",
       },
     });
+    console.log(res.data);
     return res.data;
   } catch (error) {
     throw error.response.data;
@@ -91,7 +94,11 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        localStorage.setItem("token", action.payload.token);
         state.loading = false;
+        state.token = action.payload.token;
+        state.user = jwtDecode(action.payload.token);
+        state.isAuthenticated = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;

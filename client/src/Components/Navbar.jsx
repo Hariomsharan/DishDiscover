@@ -70,7 +70,7 @@ const Navbar = () => {
           placeholder="Search for a dish..."
           className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#4CAF50] w-64"
         />
-        <i className="ri-search-2-line absolute right-18 top -translate-y-1/2 text-gray-400 text-lg pointer-events-none"></i>
+        <i className="ri-search-2-line absolute right-18 top-5 -translate-y-1/2 text-gray-400 text-lg pointer-events-none"></i>
         <button onClick={() => dispatch(logout())} className="bg-[#4CAF50] hover:bg-yellow-500 hover:cursor-pointer text-white font-medium py-2 px-3 ml-5 rounded-full">
           <i className="ri-logout-circle-r-line"></i>
         </button>

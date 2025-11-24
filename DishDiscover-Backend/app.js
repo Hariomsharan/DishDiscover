@@ -12,12 +12,35 @@ var recipeRouter = require("./routes/recipeRouter");
 
 var app = express();
 
-app.use(
-  cors({
-    origin: "https://dish-discover-lyart.vercel.app",
-    credentials: true,
-  })
-);
+const allowedOrigins = [
+  'http://localhost:5173',        // Vite dev server
+  'http://localhost:5174',        // Backup Vite port
+  'http://localhost:3000',        // React dev server (if using CRA)
+  'https://dish-discover-lyart.vercel.app'  // Production
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'auth-token']
+}));
+
+// app.use(
+//   cors({
+//     origin: "https://dish-discover-lyart.vercel.app" || "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

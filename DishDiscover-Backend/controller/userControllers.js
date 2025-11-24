@@ -13,7 +13,14 @@ exports.homepageRoute = (req, res, next) => {
 /**POST /user/signup signup controller*/
 exports.signupRoute = (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) return res.status(406).json(errors.errors);
+  
+  if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        errors: errors.array(),  // Returns array of error objects
+        message: errors.array()[0].msg  // First error message
+      });
+    }
 
   const { username, name, password, email } = req.body;
   const newUser = new User({ username, name, password, email });
@@ -26,10 +33,14 @@ exports.signupRoute = (req, res, next) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
+
+          const token = jwt.sign({ user }, jwtSecretKey, { expiresIn: 3600 });
+          req.header("auth-token", token);
+
           newUser
             .save()
             .then((user) =>
-              res.status(201).json({ message: "New User Created", user })
+              res.status(201).json({ message: "New User Created", token, user })
             )
             .catch((err) =>
               res
